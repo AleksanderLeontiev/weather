@@ -1,20 +1,12 @@
-module.exports = api => {
-	return {
-		plugins: [
-			"@babel/plugin-proposal-nullish-coalescing-operator",
-			"@babel/plugin-proposal-optional-chaining"
+module.exports = {
+	presets: [
+		[
+			"@babel/preset-env",
+			{
+				targets: { node: "current" },
+				useBuiltIns: "entry", // alternative mode: "entry"/ "usage"
+				corejs: 3, // default would be 2
+			},
 		],
-		presets: [
-			[
-				"@babel/preset-env",
-				{
-					useBuiltIns: "entry",
-					// caller.target will be the same as the target option from webpack
-					targets: api.caller(caller => caller && caller.target === "node")
-						? { node: "current" }
-						: { chrome: "58", ie: "11" }
-				}
-			]
-		]
-	}
+	],
 };
