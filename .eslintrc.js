@@ -14,12 +14,6 @@ module.exports = {
 		"jest/valid-title": "off",
 		"no-console": "off",
 		"no-alert": "off",
-		"no-restricted-globals": "off",
-		"no-plusplus": "off",
-		"no-use-before-define": "off",
-		"no-unused-vars": "off",
-		"no-proto": "off",
-		"no-return-await": "off",
 	},
 	plugins: ["jest"],
 };

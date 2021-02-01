@@ -6,10 +6,9 @@ import {
 	initWeather,
 	run,
 } from "./app";
-import * as module from "./api";
-import { getSrcMap } from "./api";
-import { getStorage } from "./storage";
+import * as apiModule from "./api";
 import * as moduleStorage from "./storage";
+import { timeout } from "./timeout";
 
 const mockData = {
 	main: {
@@ -25,14 +24,13 @@ beforeEach(() => {
     <input class="cityInput" type="text"/>
     <button>Get weather</button>
 </form>
-    <div class="weather__city"></div>
-    <div class="weather__forecast"></div>
-    <div class="weather__desc"></div>
+    <div class="weather-city"></div>
+    <div class="weather-forecast"></div>
     <div class="weatherInfo"></div>
     <div>
-        <ol id="cities" style="cursor: pointer"></ol>
+        <ol class="cities" style="cursor: pointer"></ol>
     </div>
-    <img id="map">
+    <img class="map">
 `;
 });
 
@@ -49,25 +47,23 @@ describe("add cities to list", () => {
 	});
 });
 describe("checks the function call", () => {
-	jest
-		.spyOn(module, "getWeather")
-		.mockImplementation(() => Promise.resolve({ city: "Moscow" }));
+	jest.spyOn(apiModule, "getWeather");
 	test("call getWeather", async () => {
 		await initWeather();
-		expect(module.getWeather).toBeCalled();
+		expect(apiModule.getWeather).toBeCalled();
 	});
 });
 describe("draws a list from input", () => {
-	it("checks the data entered from input", () => {
+	test("checks the data entered from input", () => {
 		drawWeather(mockData);
-		expect(document.querySelector(".weather__city").textContent).toEqual(
-			mockData.name
+		expect(document.querySelector(".weather-city").textContent).toEqual(
+			`${`Город:${mockData.name}`}`
 		);
-		expect(document.querySelector(".weather__forecast").innerHTML).toEqual(
-			mockData.main.temp
+		expect(document.querySelector(".weather-forecast").innerHTML).toEqual(
+			`${`Погода:${mockData.main.temp}`}°C`
 		);
 		expect(document.querySelector(".weatherInfo").innerHTML).toEqual(
-			mockData.wind.speed
+			`${`Скорость ветра:${mockData.wind.speed}`} m/c`
 		);
 	});
 });
@@ -75,7 +71,7 @@ describe("renders the list", () => {
 	test("list li", () => {
 		const cities = "ufa";
 		addCity(cities);
-		const citiesElement = document.getElementById("cities"); // див ол
+		const citiesElement = document.querySelector(".cities"); // див ол
 		const li = document.createElement("li");
 		li.innerText = cities;
 		expect(citiesElement).not.toBe(null);
@@ -84,9 +80,9 @@ describe("renders the list", () => {
 	});
 });
 describe("renders the list map", () => {
-	it("list li map", () => {
-		const img = document.getElementById("map");
-		const spy = jest.spyOn(module, "getSrcMap");
+	test("list li map", () => {
+		const img = document.querySelector(".map");
+		const spy = jest.spyOn(apiModule, "getSrcMap");
 		initMap("ufa");
 		expect(spy).toHaveBeenCalledWith("ufa");
 		expect(img.src).not.toBe(null);
@@ -94,13 +90,9 @@ describe("renders the list map", () => {
 });
 describe("render run function", () => {
 	jest.mock("./storage");
-	it("run app", () => {
+	test("run app", () => {
 		const sp = jest.spyOn(moduleStorage, "getStorage");
 		run();
 		expect(sp).toHaveBeenCalled();
 	});
 });
-
-function timeout(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}

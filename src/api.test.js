@@ -1,9 +1,7 @@
-import "@babel/polyfill";
 import { getSrcMap, getWeather } from "./api";
-import "regenerator-runtime/runtime";
-// jest.mock("./api");
-describe("getSrcMap", () => {
-	it("getSrcMap", async () => {
+
+describe("receive card data from the server", () => {
+	test("receive map", async () => {
 		const mock = "Yoshkar-Ola";
 		const urlUmg = getSrcMap(mock);
 		expect(urlUmg).toEqual(
@@ -14,7 +12,7 @@ describe("getSrcMap", () => {
 		global.fetch = jest.fn(() =>
 			Promise.resolve({ json: () => Promise.resolve("Yoshkar-Ola") })
 		);
-		it("shows the weather in the city", async () => {
+		test("shows the weather in the city", async () => {
 			const data = await getWeather();
 			expect(data).toEqual("Yoshkar-Ola");
 		});

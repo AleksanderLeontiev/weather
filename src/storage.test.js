@@ -1,14 +1,11 @@
-import "@babel/polyfill";
 import { getStorage, setStorage } from "./storage";
-import "regenerator-runtime/runtime";
 
 describe("receives data from localStorage", () => {
 	beforeEach(() => {
 		localStorage.clear();
 	});
-	it("saves a list of localStorage", () => {
-		jest.spyOn(global.localStorage.__proto__, "setItem");
-		global.localStorage.__proto__.setItem = jest.fn();
+	test("saves a list of localStorage", () => {
+		jest.fn(global.localStorage.setItem);
 		const key = "cities";
 		const list = ["Yoshkar-Ola", "Moscow"];
 		const value = JSON.stringify(list);
@@ -18,9 +15,8 @@ describe("receives data from localStorage", () => {
 			JSON.stringify(value)
 		);
 	});
-	it("reads a list of localStorage", () => {
-		jest.spyOn(window.localStorage.__proto__, "getItem");
-		window.localStorage.__proto__.setItem = jest.fn();
+	test("reads a list of localStorage", () => {
+		jest.fn(window.localStorage.getItem);
 		const key = "cities";
 		getStorage(key);
 		expect(localStorage.getItem).toHaveBeenCalledWith(key);
