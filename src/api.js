@@ -1,7 +1,7 @@
 const APP_ID = `2a65fd6cf7e06ab6144595db8eef6f98`;
 
 export function getSrcMap(city) {
-	return `https://maps.googleapis.com/maps/api/staticmap?center=${city},RU&zoom=14&size=400x400&key=AIzaSyDWml8rMJVcvqf6WhD0a9Z6q-PhrnnLb7A`;
+	return `https://maps.googleapis.com/maps/api/staticmap?center=${city},RU&zoom=14&size=400x400&key=AIzaSyDW6zlQYQGTpgsfqOILRe2WkMcoOPalSEo`;
 }
 export async function getWeather(cityName) {
 	const inputUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${APP_ID}`;
