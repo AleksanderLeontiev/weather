@@ -5,7 +5,7 @@ describe("receive card data from the server", () => {
 		const mock = "Yoshkar-Ola";
 		const urlUmg = getSrcMap(mock);
 		expect(urlUmg).toEqual(
-			`https://maps.googleapis.com/maps/api/staticmap?center=Yoshkar-Ola,RU&zoom=14&size=400x400&key=AIzaSyDWml8rMJVcvqf6WhD0a9Z6q-PhrnnLb7A`
+			`https://maps.googleapis.com/maps/api/staticmap?center=Yoshkar-Ola,RU&zoom=14&size=400x400&key=AIzaSyDW6zlQYQGTpgsfqOILRe2WkMcoOPalSEo`
 		);
 	});
 	describe("receives data from the server", () => {
