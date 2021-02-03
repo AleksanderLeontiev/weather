@@ -1,4 +1,4 @@
-## Приложение по выводу погоды по запросу пользователя
+## Application for displaying weather at user request
 
 ## [![codecov](https://codecov.io/gh/AleksanderLeontiev/weather/branch/weather/graph/badge.svg?token=35bdd09e-14e7-4bd0-a47d-af96c2f9c569)](https://codecov.io/gh/AleksanderLeontiev/weather)
 
