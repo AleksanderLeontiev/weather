@@ -1,6 +1,6 @@
 ## Application for displaying weather at user request
 
-## [![codecov](https://codecov.io/gh/AleksanderLeontiev/weather/branch/weather/graph/badge.svg?token=35bdd09e-14e7-4bd0-a47d-af96c2f9c569)](https://codecov.io/gh/AleksanderLeontiev/weather)
+## [![codecov](https://codecov.io/gh/AleksanderLeontiev/weather/branch/weather/graph/badge.svg?token=ZAN3DJK0UL)](https://codecov.io/gh/AleksanderLeontiev/weather)
 
 The user enters the name of the city in the input field, then clicks the "find out the weather" button. As a result, the screen displays the weather forecast and maps for the selected city. The app stores the last 10 cities that were searched. The user can select them from the list and see the weather forecast and map.
 
