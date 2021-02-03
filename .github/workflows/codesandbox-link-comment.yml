@@ -1,13 +1,11 @@
 name: Add codesandbox link
 
 on:
-  push:
-    branches:
-      - main
-  # https://github.com/mshick/add-pr-comment/issues/25
   pull_request:
-    branches:
-      - main
+    types: [opened]
+  # https://github.com/mshick/add-pr-comment/issues/25
+  pull_request_target:
+    types: [opened]
 
 jobs:
   codesandbox-comment:
