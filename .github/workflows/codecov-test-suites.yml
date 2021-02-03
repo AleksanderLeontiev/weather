@@ -1,8 +1,13 @@
 name: Run Test Suites
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    types: [opened]
+    branches:
+      - main
+
 jobs:
   test:
     runs-on: ubuntu-latest
