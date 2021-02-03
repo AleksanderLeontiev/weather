@@ -3,10 +3,10 @@ name: Deploy to GithubPages
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   deploy-to-gh-pages:
