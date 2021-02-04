@@ -8,7 +8,6 @@ import {
 } from "./app";
 import * as apiModule from "./api";
 import * as moduleStorage from "./storage";
-import { timeout } from "./timeout";
 
 const mockData = {
 	main: {
@@ -42,7 +41,6 @@ describe("add cities to list", () => {
 		const inputCity = document.querySelector(".cityInput");
 		inputCity.value = city;
 		form.dispatchEvent(new Event("submit"));
-		await timeout(1000);
 		expect(inputCity.value).toBe("");
 	});
 });

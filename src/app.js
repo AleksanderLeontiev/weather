@@ -1,7 +1,6 @@
 import { getSrcMap, getWeather } from "./api";
 import { getStorage, setStorage } from "./storage";
 
-const DEFAULT_CITY = "Yoshkar-Ola";
 const STORAGE_CITIES = "cities";
 
 export function addCity(city) {
@@ -10,6 +9,7 @@ export function addCity(city) {
 	li.innerText = city;
 	citiesElement.appendChild(li);
 }
+
 export function drawWeather(data) {
 	document.querySelector(
 		".weather-city"
@@ -43,7 +43,7 @@ export async function onSubmit(ev) {
 	const input = formElement.querySelector(".cityInput");
 	const { value } = input;
 	if (value === "") {
-		return null;
+		return;
 	}
 	input.value = "";
 	const cities = await getStorage(STORAGE_CITIES);
@@ -51,21 +51,20 @@ export async function onSubmit(ev) {
 		cities.push(value);
 		await setStorage(STORAGE_CITIES, cities);
 		addCity(value);
+		initWeather(value);
+		initMap(value);
 	}
 }
+
 export function initListeners() {
 	const formElement = document.querySelector(".formCity");
 	const citiesElement = document.querySelector(".cities");
 	formElement.addEventListener("submit", onSubmit);
 	citiesElement.addEventListener("click", onClickItem);
 }
+
 export async function run() {
-	let cities = await getStorage(STORAGE_CITIES);
-	if (!cities.includes(DEFAULT_CITY)) {
-		cities = [DEFAULT_CITY];
-		await setStorage(STORAGE_CITIES, cities);
-	}
+	const cities = await getStorage(STORAGE_CITIES);
+	await setStorage(STORAGE_CITIES, cities);
 	cities.forEach((city) => addCity(city));
-	initWeather(DEFAULT_CITY);
-	initMap(DEFAULT_CITY);
 }
