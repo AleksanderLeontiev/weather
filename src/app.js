@@ -36,14 +36,18 @@ function onClickItem(event) {
 	initWeather(event.target.innerText);
 	initMap(event.target.innerText);
 }
+
 export async function onSubmit(ev) {
 	ev.preventDefault();
 	const formElement = ev.target;
 	const input = formElement.querySelector(".cityInput");
 	const { value } = input;
+	if (value === "") {
+		return null;
+	}
 	input.value = "";
 	const cities = await getStorage(STORAGE_CITIES);
-	if (cities.length <= 10) {
+	if (cities.length <= 9) {
 		cities.push(value);
 		await setStorage(STORAGE_CITIES, cities);
 		addCity(value);

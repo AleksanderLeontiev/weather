@@ -67,7 +67,10 @@
   },
   "jest": {
     "clearMocks": true,
-    "coverageReporters": ["html", "lcov"],
+    "coverageReporters": [
+      "html",
+      "lcov"
+    ],
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "coverageThreshold": {

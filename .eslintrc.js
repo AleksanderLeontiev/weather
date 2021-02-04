@@ -12,6 +12,7 @@ module.exports = {
 	rules: {
 		"import/prefer-default-export": "off",
 		"jest/valid-title": "off",
+		"consistent-return": "off",
 		"no-console": "off",
 		"no-alert": "off",
 	},
