@@ -8,6 +8,7 @@ describe("receive card data from the server", () => {
 			`https://maps.googleapis.com/maps/api/staticmap?center=Yoshkar-Ola,RU&zoom=14&size=400x400&key=AIzaSyDW6zlQYQGTpgsfqOILRe2WkMcoOPalSEo`
 		);
 	});
+
 	describe("receives data from the server", () => {
 		global.fetch = jest.fn(() =>
 			Promise.resolve({ json: () => Promise.resolve("Yoshkar-Ola") })

@@ -24,7 +24,6 @@ export function drawWeather(data) {
 
 export function initWeather(city) {
 	getWeather(city).then((data) => drawWeather(data));
-	// .catch(exp => console.error(exp));
 }
 
 export function initMap(city) {
@@ -55,6 +54,7 @@ export async function onSubmit(ev) {
 		initMap(value);
 	}
 }
+
 export function initListeners() {
 	const formElement = document.querySelector(".formCity");
 	const citiesElement = document.querySelector(".cities");
