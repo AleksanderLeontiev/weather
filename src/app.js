@@ -1,4 +1,4 @@
-import { getSrcMap, getWeather } from "./api";
+import { getCity, getSrcMap, getWeather } from "./api";
 import { getStorage, setStorage } from "./storage";
 
 const STORAGE_CITIES = "cities";
@@ -32,7 +32,7 @@ export function initMap(city) {
 	img.src = getSrcMap(city);
 }
 
-function onClickItem(event) {
+export function onClickItem(event) {
 	initWeather(event.target.innerText);
 	initMap(event.target.innerText);
 }
@@ -55,7 +55,6 @@ export async function onSubmit(ev) {
 		initMap(value);
 	}
 }
-
 export function initListeners() {
 	const formElement = document.querySelector(".formCity");
 	const citiesElement = document.querySelector(".cities");
@@ -67,4 +66,9 @@ export async function run() {
 	const cities = await getStorage(STORAGE_CITIES);
 	await setStorage(STORAGE_CITIES, cities);
 	cities.forEach((city) => addCity(city));
+	getCity().then((obj) => {
+		const myCity = obj.city;
+		initWeather(myCity);
+		initMap(myCity);
+	});
 }

@@ -31,6 +31,11 @@ beforeEach(() => {
     </div>
     <img class="map">
 `;
+	global.fetch = jest.fn(() =>
+		Promise.resolve({
+			json: () => Promise.resolve(mockData),
+		})
+	);
 });
 
 describe("add cities to list", () => {
@@ -45,9 +50,9 @@ describe("add cities to list", () => {
 	});
 });
 describe("checks the function call", () => {
-	jest.spyOn(apiModule, "getWeather");
-	test("call getWeather", async () => {
-		await initWeather();
+	test("call getWeather", () => {
+		jest.spyOn(apiModule, "getWeather");
+		initWeather();
 		expect(apiModule.getWeather).toBeCalled();
 	});
 });
