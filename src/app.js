@@ -2,6 +2,7 @@ import { getCity, getSrcMap, getWeather } from "./api";
 import { getStorage, setStorage } from "./storage";
 
 const STORAGE_CITIES = "cities";
+const NUMBER_CITY = 9;
 
 export function addCity(city) {
 	const citiesElement = document.querySelector(".cities");
@@ -36,6 +37,14 @@ export function onClickItem(event) {
 	initMap(event.target.innerText);
 }
 
+async function refreshCities() {
+	const cities = await getStorage(STORAGE_CITIES);
+	const citiesElement = document.querySelector(".cities");
+	while (citiesElement.firstChild) {
+		citiesElement.removeChild(citiesElement.lastChild);
+	}
+	cities.forEach((value) => addCity(value));
+}
 export async function onSubmit(ev) {
 	ev.preventDefault();
 	const formElement = ev.target;
@@ -45,14 +54,18 @@ export async function onSubmit(ev) {
 		return;
 	}
 	input.value = "";
-	const cities = await getStorage(STORAGE_CITIES);
-	if (cities.length <= 9) {
-		cities.push(value);
-		await setStorage(STORAGE_CITIES, cities);
-		addCity(value);
-		initWeather(value);
-		initMap(value);
+	const cities = new Set(await getStorage(STORAGE_CITIES));
+	if (cities.size <= NUMBER_CITY) {
+		cities.add(value);
+	} else {
+		const lastElement = Array.from(cities).pop();
+		cities.delete(lastElement);
+		cities.add(value);
 	}
+	await setStorage(STORAGE_CITIES, Array.from(cities));
+	await refreshCities();
+	initWeather(value);
+	initMap(value);
 }
 
 export function initListeners() {
