@@ -9,6 +9,10 @@ import {
 import * as apiModule from "./api";
 import * as moduleStorage from "./storage";
 
+
+
+
+
 const mockData = {
 	main: {
 		temp: "-22",

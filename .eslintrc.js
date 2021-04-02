@@ -1,10 +1,12 @@
 module.exports = {
+	parser: "@typescript-eslint/parser",
+	plugins: ["@typescript-eslint"],
 	env: {
 		browser: true,
 		es2021: true,
 		"jest/globals": true,
 	},
-	extends: ["airbnb-base", "plugin:jest/recommended", "prettier"],
+	extends: ["airbnb-base", "plugin:jest/recommended", "prettier", "plugin:@typescript-eslint/recommended"],
 	parserOptions: {
 		ecmaVersion: 12,
 		sourceType: "module",
@@ -16,5 +18,4 @@ module.exports = {
 		"no-console": "off",
 		"no-alert": "off",
 	},
-	plugins: ["jest"],
 };
